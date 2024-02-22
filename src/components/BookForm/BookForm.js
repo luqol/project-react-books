@@ -1,41 +1,25 @@
-import React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
-class BookForm extends React.Component{ 
+const BookForm = () =>{
+    const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
+    const dispatch = useDispatch();
 
-  state = {
-    title: '',
-    author: '',
-  };
+    const handleSubmit = e =>{
+        e.preventDefault();
+        dispatch( {type: 'ADD_BOOK', payload: {author, title} } );
+        setTitle('');
+        setAuthor('');
+    };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.addBook({title: this.state.title, author: this.state.author});
-    this.setState({ ...this.state, title: '', author: ''});
-
-  };
-
-  setTitle = value => {
-    this.setState({...this.state, title: value});
-  };
-
-  setAuthor = value => {
-    this.setState({...this.state, author: value});
-  };
-
-
-
- render() {
-    const {title, author} = this.state;
-    const {handleSubmit, setAuthor, setTitle} = this;
-    return(
-      <form onSubmit={handleSubmit}>
+  return(
+    <form onSubmit={handleSubmit}>
         Author: <input type="text" value={title} onChange={e => setTitle(e.target.value)}/>
         Title: <input type="text" value={author} onChange={e => setAuthor(e.target.value)}/>
         <button>Add book</button>
-        </form>
-      );
-  };
-
-}
+    </form>
+  );
+};
 
 export default BookForm;
