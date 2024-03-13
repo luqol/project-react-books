@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBooks, removeBook } from "../../redux/booksRedux";
+import { getAllBooks, removeBookRequest } from "../../redux/booksRedux";
 
 const BookList = () => {
 
@@ -8,7 +8,7 @@ const BookList = () => {
 
   const remove = (e, bookId) => {
     e.preventDefault(); 
-    dispatch( removeBook(bookId ));
+    dispatch( removeBookRequest(bookId ));
   };
 
   return(
